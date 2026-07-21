@@ -24,5 +24,7 @@ public class PetService {
     public Pet addPet(Pet pet) {
         return petRepository.save(pet);
     }
-
+public List <Pet> getPetsBySpecies(String species){
+        return petRepository.findBySpecies(species);
+}
 }
