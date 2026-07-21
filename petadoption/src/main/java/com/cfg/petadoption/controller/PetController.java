@@ -1,5 +1,5 @@
 package com.cfg.petadoption.controller;
-
+import lombok.RequiredArgsConstructor;
 import com.cfg.petadoption.entity.Pet;
 import com.cfg.petadoption.service.PetService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,13 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class PetController {
 
     private final PetService petService;
-
-    public PetController(PetService petService) {
-        this.petService = petService;
-    }
 
     @GetMapping("/pets")
     public List<Pet> getAllPets() {
