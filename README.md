@@ -28,7 +28,11 @@ spring:
     url: jdbc:mysql://localhost:3306/pet_adoption
     username: root
     password: ${DB_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
 
 app:
   name: Pet Adoption Catalogue
