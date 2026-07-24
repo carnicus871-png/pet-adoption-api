@@ -14,7 +14,7 @@ import java.util.List;
 public class PetService {
 
     private final PetRepository petRepository;
-
+    // Gets all pets from the database.
     public List<Pet> getAllPets() {
         log.info("Retrieving all pets from the database");
 
@@ -26,17 +26,16 @@ public class PetService {
         return pets;
 
     }
-
+    // Saves a new pet.
     public Pet addPet(Pet pet) {
         if (pet == null) {
             log.error("Cannot add a null pet");
-            throw new IllegalArgumentException("Pet cannot be null");
         }
 
         log.info("Adding new pet: {}", pet.getName());
         return petRepository.save(pet);
     }
-
+    // Finds pets that match the requested species
     public List<Pet> getPetsBySpecies(String species) {
         log.info("Searching for pets with species: {}", species);
         return petRepository.findBySpecies(species);

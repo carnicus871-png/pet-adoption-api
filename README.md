@@ -15,21 +15,23 @@ It provides endpoints to retrieve, add and search for pets available for adoptio
 - OpenAPI (Swagger)
 - Maven
 
-### Configuration
+## Configuration
 
-Update the following values in `src/main/resources/application.properties` if required:
+The application is configured using `src/main/resources/application.yml`.
 
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/pet_adoption
-spring.datasource.username=root
-spring.datasource.password=${DB_PASSWORD}
-```
-The database password is read from the `DB_PASSWORD` environment variable.
+```yaml
+spring:
+  application:
+    name: petadoption
 
-The application name can also be changed by editing:
+  datasource:
+    url: jdbc:mysql://localhost:3306/pet_adoption
+    username: root
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
-```properties
-app.name=Pet Adoption Catalogue
+app:
+  name: Pet Adoption Catalogue
 ```
 ## Running the Project
 
@@ -40,7 +42,6 @@ app.name=Pet Adoption Catalogue
 ```text
 src/main/resources/database.sql
 ```
-
 4. Configure the `DB_PASSWORD` environment variable with your MySQL password.
 5. Run the Spring Boot application.
 

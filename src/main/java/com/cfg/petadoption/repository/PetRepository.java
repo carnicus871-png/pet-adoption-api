@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PetRepository extends JpaRepository<Pet, Integer> {
+    // Finds all pets with the given species.
     List<Pet> findBySpecies(String species);
 }
