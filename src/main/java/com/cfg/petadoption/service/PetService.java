@@ -34,7 +34,7 @@ public class PetService {
     }
 
     // Saves a new pet.
-    public Pet addPet(Pet pet) {
+    public Pet addPet(Pet pet) throws IllegalArgumentException {
         if (isNull(pet)) {
             log.error("Cannot add a null pet");
             throw new IllegalArgumentException("Pet cannot be null");
@@ -55,7 +55,7 @@ public class PetService {
         log.info("Searching for pets with species: {}", species);
         List<Pet> pets = petRepository.findAll();
         return pets.stream()
-                .filter(pet -> pet.getSpecies().equals(species))
+                .filter(pet -> pet.getSpecies().equalsIgnoreCase(species))
                 .toList();
     }
 

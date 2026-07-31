@@ -135,7 +135,7 @@ class PetServiceTest {
         List<Pet> pets = new ArrayList<>();
         pets.add(pet1);
 
-        when(petRepository.findBySpecies(species))
+        when(petRepository.findAll())
                 .thenReturn(pets);
         List<Pet> result = petService.getPetsBySpecies(species);
 
@@ -146,7 +146,7 @@ class PetServiceTest {
     void getPetsBySpeciesReturnsEmptyListWhenNoPetsFound() {
         String species = "Rabbit";
 
-        when(petRepository.findBySpecies(species))
+        when(petRepository.findAll())
                 .thenReturn(new ArrayList<>());
         List<Pet> result = petService.getPetsBySpecies(species);
         assertTrue(result.isEmpty());
