@@ -8,12 +8,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class PetService {
 
     private final PetRepository petRepository;
+
+    public <T> boolean isNull(T item) {
+        return item == null;
+    }
 
     // Gets all pets from the database.
     public List<Pet> getAllPets() {
@@ -30,19 +35,28 @@ public class PetService {
 
     // Saves a new pet.
     public Pet addPet(Pet pet) {
-        if (pet == null) {
+        if (isNull(pet)) {
             log.error("Cannot add a null pet");
             throw new IllegalArgumentException("Pet cannot be null");
         }
-
         log.info("Adding new pet: {}", pet.getName());
-        return petRepository.save(pet);
+
+        try {
+            return petRepository.save(pet);
+        } catch (Exception e) {
+            log.error("Error saving pet", e);
+            throw new RuntimeException("Unable to save pet", e);
+        }
+
     }
 
     // Finds pets that match the requested species
     public List<Pet> getPetsBySpecies(String species) {
         log.info("Searching for pets with species: {}", species);
-        return petRepository.findBySpecies(species);
+        List<Pet> pets = petRepository.findAll();
+        return pets.stream()
+                .filter(pet -> pet.getSpecies().equals(species))
+                .toList();
     }
 
     public Pet getPetById(Integer id) {
